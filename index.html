@@ -9,6 +9,31 @@
                 today = month + '/' + day + '/' + year;
                 document.getElementById('subDate').value = today;
             };
+
+            function submitForm() {
+                var form = document.getElementById('covidForm');
+                var result = document.getElementById('00N5d00000J8btR').value;
+                var inputFields = document.getElementsByClassName('q');
+                var emptyField = false;
+
+                for(var i=0;i<inputFields.length;i++) {
+                    if(inputFields[i].value == ''){
+                        emptyField = true;
+                    }
+                }
+
+                if(result != '' && emptyField == false) {
+                    if(result == 'Positive'){
+                        document.getElementById('theURL').value = 'https://devorg20/COVIDtestresults/gbCOVIDtestThankyou.html?view=h';
+                        form.submit();
+                    } else {
+                        form.submit();
+                    }
+                    console.log(result);
+                 } else {
+                    alert('All fields are required!');
+                 }
+            }
         </script>
         <style>
             #questionnaire {
@@ -47,13 +72,13 @@
             <div style="display:flex;width:100%;justify-content:center;">
                 <form  action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST" name="covid" id="covidForm">
                     <input type=hidden name="orgid" value="00Di0000000XoKP">
-                    <input type=hidden name="retURL" value="https://devorg20.github.io/COVIDtestresults/gbCOVIDtestThankyou.html" id="theURL">
+                    <input type=hidden name="retURL" value="" id="theURL">
                     <input type="hidden" id="status" name="status" value="Closed">
                     <input type="hidden" id="subject" name="subject" value="COVID-test" />
 
                     <div id="questionnaire">
                         <div style="text-align:center;margin-bottom:30px;">
-                            <span style="font-size:1.3em;font-weight:bold">Greybrook COVID-19 Test Results</span><br/><br/>
+                            <span style="font-size:1.3em;font-weight:bold">Greybrook COVID-19 Test Resultes</span><br/><br/>
                             <div style="text-align: justify;">
                                 <span style="font-size:16px;">
                                     In accordance with Greybrook’s COVID-19 Vaccination Policy, and for the health and safety of their fellow co-workers, Greybrook and Greyspring employees who are not Vaccinated, or who are Vaccinated but elect not to provide the required attestation, must undergo regular COVID-19 testing before they will be permitted to enter Greybrook’s workplace. Impacted employees must participate in the rapid antigen screening program by completing a qualified antigen test and submitting results twice per week (Mondays and Thursdays) before entering the Greybrook workplace. All details concerning COVID-19 tests is confidential, and any questions should be directed to Sarah Mansour, Executive Director, Strategy and Corporate Development.
@@ -65,9 +90,9 @@
                             <div style="margin-bottom: 20px;">
                                 <span style="font-size:1.1em;font-weight:bold;">1) Please indicate the date and time that you completed one of Greybrook’s approved rapid antigen test. </span> <br/><br/>
                                 <div style="padding-left: 20px;">
-                                    <input type="date" placeholder="Date..." id="00N5d00000J8btW" name="00N5d00000J8btW" style="padding: 10px 15px;" required/>
+                                    <input type="date" placeholder="Date..." id="00N5d00000J8btW" name="00N5d00000J8btW" style="padding: 10px 15px;" required class="q"/>
                                     &nbsp;&nbsp;
-                                    <input type="text" id="00N5d00000J8btb" name="00N5d00000J8btb" placeholder="Time..." size="10" required/>
+                                    <input type="text" id="00N5d00000J8btb" name="00N5d00000J8btb" placeholder="Time..." size="10" required class="q"/>
                                 </div>
                             </div>
                             <div style="margin-bottom: 20px;">
@@ -84,15 +109,15 @@
                         <div style="padding-top: 10px;text-align:center">
                             <hr>
                             <div style="padding-top: 20px;">
-                                <input type="text" name="00N1Y00000InPK1" placeholder="First Name"  id="00N1Y00000InPK1" required>
-                                <input type="text" name="00N1Y00000InPK6" placeholder="Last Name" id="00N1Y00000InPK6" required>
+                                <input type="text" name="00N1Y00000InPK1" placeholder="First Name"  id="00N1Y00000InPK1" required class="q">
+                                <input type="text" name="00N1Y00000InPK6" placeholder="Last Name" id="00N1Y00000InPK6" required class="q">
                                 <br/><br/>
                                 <input type="text" name="00N1Y00000InPKB" id="subDate" value="" readonly>
                             </div>
                             <div style="padding-top: 15px;max-width:620px;text-align:justify">By clicking SUBMIT, I agree that the above information is accurate and complete to the best of my knowledge.</div>
                         </div>
                         <div id="button" style="padding: 30px 0px 10px 0px;text-align: center">
-                            <input type="submit" value="Submit" class="submit">
+                            <input type="button" value="Submit" class="submit" onclick="submitForm()">
                         </div>
                     </div>
                 <form>
